@@ -1,0 +1,23 @@
+package com.frameworkium.ui.driver.remotes;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static com.frameworkium.base.properties.Property.BROWSER_STACK;
+
+public class BrowserStack {
+
+    private BrowserStack() {
+        // hide default constructor for this util class
+    }
+
+    public static URL getURL() throws MalformedURLException {
+        return new URL(String.format("http://%s:%s@hub.browserstack.com:80/wd/hub",
+                System.getenv("BROWSER_STACK_USERNAME"),
+                System.getenv("BROWSER_STACK_ACCESS_KEY")));
+    }
+
+    public static boolean isDesired() {
+        return BROWSER_STACK.getBoolean();
+    }
+}

@@ -1,8 +1,6 @@
 package com.frameworkium.ui.driver;
 
 import com.frameworkium.base.properties.Property;
-//import com.frameworkium.ui.capture.ScreenshotCapture;
-//import com.frameworkium.ui.listeners.CaptureListener;
 import com.frameworkium.ui.driver.remotes.BrowserStack;
 import com.frameworkium.ui.driver.remotes.Sauce;
 import com.frameworkium.ui.listeners.LoggingListener;

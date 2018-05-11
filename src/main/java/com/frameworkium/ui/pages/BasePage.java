@@ -13,10 +13,12 @@ import org.openqa.selenium.support.ui.Wait;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 
 import java.time.Duration;
+import java.util.Observable;
+import java.util.Observer;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
-public abstract class BasePage<T extends BasePage<T>> {
+public abstract class BasePage<T extends BasePage<T>> extends Observable {
 
     protected final Logger logger = LogManager.getLogger(this);
     protected final WebDriver driver;

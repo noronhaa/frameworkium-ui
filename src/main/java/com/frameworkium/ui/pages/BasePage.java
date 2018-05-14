@@ -146,7 +146,7 @@ public abstract class BasePage<T extends BasePage<T>> extends Observable {
         }
 
         //todo capture
-//        takePageLoadedScreenshotAndSendToCapture();
+        //takePageLoadedScreenshotAndSendToCapture();
         logPageLoadToAllureIfUsing();
 
         return (T) this;
@@ -167,14 +167,14 @@ public abstract class BasePage<T extends BasePage<T>> extends Observable {
 
 
     //todo CAPTURE
-//    private void takePageLoadedScreenshotAndSendToCapture() {s
-//        if (ScreenshotCapture.isRequired()) {
-//            Command pageLoadCommand = new Command(
-//                    "load", "page", getSimplePageObjectName());
-//            BaseUITest.getCapture().takeAndSendScreenshot(
-//                    pageLoadCommand, driver);
-//        }
-//    }
+    //    private void takePageLoadedScreenshotAndSendToCapture() {s
+    //        if (ScreenshotCapture.isRequired()) {
+    //            Command pageLoadCommand = new Command(
+    //                    "load", "page", getSimplePageObjectName());
+    //            BaseUITest.getCapture().takeAndSendScreenshot(
+    //                    pageLoadCommand, driver);
+    //        }
+    //    }
 
     private String getSimplePageObjectName() {
         String packageName = getClass().getPackage().getName();

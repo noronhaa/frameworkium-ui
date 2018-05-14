@@ -39,7 +39,7 @@ public abstract class BaseUITest implements SauceOnDemandSessionIdProvider, Sauc
     private static final Logger baseLogger = LogManager.getLogger();
 
     //todo capture
-//    private static final ThreadLocal<ScreenshotCapture> capture = ThreadLocal.withInitial(() -> null);
+    //    private static final ThreadLocal<ScreenshotCapture> capture = ThreadLocal.withInitial(() -> null);
     private static final ThreadLocal<Driver> driver = ThreadLocal.withInitial(() -> null);
     private static final ThreadLocal<Wait<WebDriver>> wait = ThreadLocal.withInitial(() -> null);
     private static UserAgent userAgent;
@@ -95,7 +95,7 @@ public abstract class BaseUITest implements SauceOnDemandSessionIdProvider, Sauc
     @BeforeMethod(alwaysRun = true, dependsOnMethods = "instantiateDriverObject")
     protected static void configureBrowserBeforeTest(Method testMethod) {
         //todo capture - removed param which used to parse a param for capture
-//        configureBrowserBeforeTest(getTestNameForCapture(testMethod));
+        //configureBrowserBeforeTest(getTestNameForCapture(testMethod));
         configureBrowserBeforeTest();
     }
 
@@ -115,9 +115,9 @@ public abstract class BaseUITest implements SauceOnDemandSessionIdProvider, Sauc
             wait.set(newDefaultWait());
             userAgent = new UserAgent(getDriver());
             //TODO CAPTURE - also took out 'testName' param from method
-//            if (ScreenshotCapture.isRequired()) {
-//                initialiseNewScreenshotCapture(testName);
-//            }
+            //if (ScreenshotCapture.isRequired()) {
+            //      initialiseNewScreenshotCapture(testName);
+            //}
         } catch (Exception e) {
             baseLogger.error("Failed to configure browser.", e);
             throw new IllegalStateException("Failed to configure browser.", e);
@@ -147,28 +147,28 @@ public abstract class BaseUITest implements SauceOnDemandSessionIdProvider, Sauc
     }
 
     //TODO CAPTURE
-//    @AfterSuite(alwaysRun = true)
-//    protected static void shutdownScreenshotExecutor() {
-//        if (!ScreenshotCapture.isRequired()) {
-//            return;
-//        }
-//        String prefix = "Screenshot Capture: ";
-//        baseLogger.info(prefix + "processing remaining async backlog...");
-//        try {
-//            boolean timeout = !ScreenshotCapture.processRemainingBacklog();
-//            if (timeout) {
-//                baseLogger.error(prefix + "shutdown timed out. "
-//                        + "Some screenshots might not have been sent.");
-//            } else {
-//                baseLogger.info(prefix + "finished backlog.");
-//            }
-//        } catch (InterruptedException e) {
-//            baseLogger.error(prefix + "executor was interrupted. "
-//                    + "Some screenshots might not have been sent.");
-//        }
-//    }
+    //    @AfterSuite(alwaysRun = true)
+    //    protected static void shutdownScreenshotExecutor() {
+    //        if (!ScreenshotCapture.isRequired()) {
+    //            return;
+    //        }
+    //        String prefix = "Screenshot Capture: ";
+    //        baseLogger.info(prefix + "processing remaining async backlog...");
+    //        try {
+    //            boolean timeout = !ScreenshotCapture.processRemainingBacklog();
+    //            if (timeout) {
+    //                baseLogger.error(prefix + "shutdown timed out. "
+    //                        + "Some screenshots might not have been sent.");
+    //            } else {
+    //                baseLogger.info(prefix + "finished backlog.");
+    //            }
+    //        } catch (InterruptedException e) {
+    //            baseLogger.error(prefix + "executor was interrupted. "
+    //                    + "Some screenshots might not have been sent.");
+    //        }
+    //    }
 
-//    /** Creates the allure properties for the report. */
+    /** Creates the allure properties for the report. */
     @AfterSuite(alwaysRun = true)
     protected static void createAllureProperties() {
         new ReflectionHelper().createAllureProperties();
@@ -204,22 +204,22 @@ public abstract class BaseUITest implements SauceOnDemandSessionIdProvider, Sauc
     }
 
     //todo capture
-//    private static String getTestNameForCapture(Method testMethod) {
-//        Optional<String> testID = TestIdUtils.getIssueOrTmsLinkValue(testMethod);
-//        if (!testID.isPresent() || testID.get().isEmpty()) {
-//            baseLogger.warn("{} doesn't have a TestID annotation.", testMethod.getName());
-//            testID = Optional.of(StringUtils.abbreviate(testMethod.getName(), 20));
-//        }
-//        return testID.orElse("n/a");
-//    }
+    //    private static String getTestNameForCapture(Method testMethod) {
+    //        Optional<String> testID = TestIdUtils.getIssueOrTmsLinkValue(testMethod);
+    //        if (!testID.isPresent() || testID.get().isEmpty()) {
+    //            baseLogger.warn("{} doesn't have a TestID annotation.", testMethod.getName());
+    //            testID = Optional.of(StringUtils.abbreviate(testMethod.getName(), 20));
+    //        }
+    //        return testID.orElse("n/a");
+    //    }
 
     //todo capture
     /**
      * Initialise the screenshot capture and link to issue/test case id.
      */
-//    private static void initialiseNewScreenshotCapture(String testName) {
-//        capture.set(new ScreenshotCapture(testName));
-//    }
+    //    private static void initialiseNewScreenshotCapture(String testName) {
+    //        capture.set(new ScreenshotCapture(testName));
+    //    }
 
     /** Create a new {@link Wait} for the thread local driver and default timeout. */
     public static Wait<WebDriver> newDefaultWait() {
@@ -259,9 +259,9 @@ public abstract class BaseUITest implements SauceOnDemandSessionIdProvider, Sauc
     }
 
     //todo capture
-//    public static ScreenshotCapture getCapture() {
-//        return capture.get();
-//    }
+    //    public static ScreenshotCapture getCapture() {
+    //        return capture.get();
+    //    }
 
     public static Wait<WebDriver> getWait() {
         return wait.get();

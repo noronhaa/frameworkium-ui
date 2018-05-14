@@ -19,9 +19,20 @@ This is one of the Frameworkium 3 libraries. Frameworkium 3 is a new release of 
 
 ***
 
-##Contents
-[contributionstest1](#Contributions)
-[contributionstest1](###Contributions)
+## Contents
+- [Summary](#summary)
+- [Getting Started](#getting-started)
+- [Selenium Grid](#selenium-grid)
+- [frameworkium-ui Structure](#frameworkium-ui-structure)
+- [Supported Browsers](#supported-browsers)
+- [Command Line Options](#command-line-options)
+- [Features](#features)
+    - [Page waits & @Visible annotations](#page-waits-and-visible-annotations)
+    - [Logging](#logging)
+    - [Custom Browser Implementations](#custom-browser-implementations)
+    - [Using Config file instead of CLI parameters](#using-config-file-instead-of-cli-parameters)
+    - [Automatically Downloading Webdrivers](#automatically-downloading-webdrivers)
+- [Contributions](#contributions)
 
 ## Summary
 
@@ -181,7 +192,11 @@ use chrome browser instead of firefox just parse `mvn clean test -Dbrowser=chrom
 Want to run parallel execution
 with 2 threads? just parse `mvn clean test -Dthreads=2` and frameworkium takes care of all the logic.
 
-please refer to '[Command Line Options](https://frameworkium.github.io/#_pages/Command-Line-Options.md)' for a full list of options
+Full list of CLI options below.
+
+## Supported Browsers
+
+See [the default driver implementations][driver-impl] used in frameworkium-ui for a list of the supported browsers.
 
 ## Command Line Options
 Tests can be executed by running `mvn clean verify`.
@@ -316,7 +331,7 @@ For full lists of platforms/browsers supported see:
 and [SauceLabs](https://saucelabs.com/platforms/) platform lists.
 
 ## Features
-#### Page waits and @visible annotations
+### Page waits and @visible annotations
 **Only use waits in your Page Object - _never_ in your tests**
 
 Everytime you load a new page, frameworkium-ui will automatically wait for that page to load, we can make more reliable 
@@ -324,18 +339,18 @@ by using the `@visible` annotation above various page objects, when the new page
 for the visibility of all elements that have been tagged `@visible` to be visible before continuing the test. This means
 you should not need any explicit waits
 
-##### Related annotations
+#### Related annotations
 - `@Visible` - covered above - make sure element is visible when page loads
 - `@Invisible` - make sure element is **not** visible when page loads
 - `@ForceVisible` - attempt to force visibility of a hidden element when a page loads so we can interact with it
 
-##### Visibility of a list<Webelement> or a table?
+#### Visibility of a list<Webelement> or a table?
 We may want to check for visibility of a table/list, however, we don't want to spend time checking each element in the table is 
 visible (could take a long time for large lists). For this we can parse a parameter to the annotation: 
 `@Visible(checkAtMost=1)` which will check 1 element (or any amount chosen) in the list for visibility. Parameter works for all visibility annotations
 
 
-##### Explicit waits
+#### Explicit waits
 However - there are times when you'll need to wait explicitly. For example:
 
  - we want to click a button
@@ -368,7 +383,7 @@ public Page clickInitiallyHiddenButton() {
 We have introduced our own extension to `ExpectedConditions` called `ExtraExpectedConditions`.
 
 NB - frameworkium-ui has implicit waits due to our use of HtmlElements.
-#### Logging
+### Logging
 Each test run generates a log as defined in the log4j.xml
 
 By default, all contents will push to `frameworkium.log`, in the `/logs/` folder.
@@ -393,7 +408,7 @@ public class SomeClass extends BasePageOrBaseTestMaybe {
 }
 ```
 
-#### Custom Browser Implementations
+### Custom Browser Implementations
 
 Sometimes, one needs to open browsers and devices with certain capabilities and flags set.
 This is achieved in the WebDriver protocol by `DesiredCapabilties`, 
@@ -404,7 +419,7 @@ The solution is to create a new Java class extending `AbstractDriver`
 somewhere in your test code, which sets up the DesiredCapabilities and WebDriver as you require them;
 then reference this class (by name) using the `-DcustomBrowserImpl` parameter at runtime.
 
-##### Running chrome in incognito mode example:
+#### Running chrome in incognito mode example:
 
 Example would be to create the class `ChromeIncognitoImpl.java` somewhere in your test code:
 
@@ -437,7 +452,7 @@ See [the default driver implementations][driver-impl] used in frameworkium-ui.
 If you create a better default implementation (or just something cool) please submit a pull request.
 
 [driver-impl]: https://github.com/Frameworkium/frameworkium-ui/tree/master/src/main/java/com/frameworkium/ui/driver/drivers
-####1 Using Config file instead of CLI parameters
+### Using Config file instead of CLI parameters
 Rather than providing all of the details in the command line,
 you can instead create config files (in your `resources` folder) to store common configurations.
 An example would be:
@@ -480,7 +495,7 @@ and you'd then use this config file by running:
 mvn clean verify -Dconfig=FirefoxGrid.yaml
 ```
 
-#### Automatically Downloading WebDrivers
+### Automatically Downloading WebDrivers
 Since: 2.4.4
 
 frameworkium-ui supports the driver-binary-downloader Maven plugin, which allows the automatic download of webdriver binaries from the Internet i.e.:

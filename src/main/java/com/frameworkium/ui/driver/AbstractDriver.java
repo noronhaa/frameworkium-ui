@@ -60,9 +60,9 @@ public abstract class AbstractDriver implements Driver {
         WebDriverWrapper eventFiringWD = new WebDriverWrapper(getWebDriver(caps));
         eventFiringWD.register(new LoggingListener());
         //todo CAPTURE INTEGRATION
-//        if (ScreenshotCapture.isRequired()) {
-//            eventFiringWD.register(new CaptureListener());
-//        }
+        //        if (ScreenshotCapture.isRequired()) {
+        //            eventFiringWD.register(new CaptureListener());
+        //        }
         if (!Driver.isNative()) {
             eventFiringWD.manage().timeouts().setScriptTimeout(10, SECONDS);
         }

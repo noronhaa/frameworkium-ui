@@ -84,12 +84,12 @@ public class HomePage extends BasePage<HomePage> {
  
  }
 ```
-5. Have each **Test Class**  extend extend frameworkium-ui's `com.frameworkium.ui.tests.BaseTest`
+5. Have each **Test Class**  extend extend frameworkium-ui's `com.frameworkium.ui.tests.BaseUITest`
 
  ```java
-import com.frameworkium.ui.tests.BaseTest;
+import com.frameworkium.ui.tests.BaseUITest;
 
-public class HomePageTests extends BaseTest{
+public class HomePageTests extends BaseUITest{
     
 }
 ```
@@ -166,7 +166,7 @@ Download the latest version from <https://github.com/groupon/Selenium-Grid-Extra
 
 ## frameworkium-ui Structure
 #### How does frameworkium-ui work?
-frameworkium functionality comes from extending `BasePage` and `BaseTest`. 
+Frameworkium functionality comes from extending `BasePage` and `BaseTest`. 
 
 ##### BaseTest
 This means when your test class is executed it will also run code from BaseTest. 
@@ -335,8 +335,8 @@ and [SauceLabs](https://saucelabs.com/platforms/) platform lists.
 **Only use waits in your Page Object - _never_ in your tests**
 
 Everytime you load a new page, frameworkium-ui will automatically wait for that page to load, we can make more reliable 
-by using the `@visible` annotation above various page objects, when the new page load frameworkium-ui will wait
-for the visibility of all elements that have been tagged `@visible` to be visible before continuing the test. This means
+by using the `@Visible` annotation above various page objects, when the new page load frameworkium-ui will wait
+for the visibility of all elements that have been tagged `@Visible` to be visible before continuing the test. This means
 you should not need any explicit waits
 
 #### Related annotations
@@ -383,6 +383,7 @@ public Page clickInitiallyHiddenButton() {
 We have introduced our own extension to `ExpectedConditions` called `ExtraExpectedConditions`.
 
 NB - frameworkium-ui has implicit waits due to our use of HtmlElements.
+
 ### Logging
 Each test run generates a log as defined in the log4j.xml
 
@@ -395,7 +396,7 @@ you should instantiate a new `Logger` in the class from which you're logging. E.
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class SomeClass extends BasePageOrBaseTestMaybe {
+public class SomeClass extends BasePage { // Or BaseTest
 
     private Logger logger = LogManager.getLogger(SomeClass.class);
     

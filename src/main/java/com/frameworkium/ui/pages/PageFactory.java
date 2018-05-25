@@ -5,7 +5,7 @@ import java.time.Duration;
 
 public class PageFactory {
 
-    private PageFactory() {}
+    protected PageFactory() {}
 
     public static <T extends BasePage<T>> T newInstance(Class<T> clazz) {
         return instantiatePageObject(clazz).get();

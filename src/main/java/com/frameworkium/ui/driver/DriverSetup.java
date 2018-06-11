@@ -74,8 +74,6 @@ public class DriverSetup {
                 return new LegacyFirefoxImpl();
             case CHROME:
                 return new ChromeImpl();
-            case OPERA:
-                return new OperaImpl();
             case IE:
                 return new InternetExplorerImpl();
             case SAFARI:

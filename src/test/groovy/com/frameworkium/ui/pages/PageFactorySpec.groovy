@@ -20,7 +20,7 @@ class PageFactorySpec extends Specification {
 
     def "Instantiate a simple page object"() {
         // skip test if capture is enabled otherwise things break!
-        //Assume.assumeFalse(ScreenshotCapture.isRequired()) //have not integrated capture with f-ui yet
+        //Assume.assumeFalse(ScreenshotCapture.isRequired()) //TODO integrate capture with f-ui yet
 
         given: "A driver which will load a simple page"
             BaseUITest.setDriver(mockDriver)
@@ -31,7 +31,7 @@ class PageFactorySpec extends Specification {
 
         then: "Wait is successful"
             2 * mockDriver.getDriver() >> webDriverWrapperSpy
-            1 * webDriverWrapperSpy.executeScript(_ as String) >> true
+            1 * webDriverWrapperSpy.executeAsyncScript(_ as String) >> true // JavascriptWait
             !pageObject.isWebElementNull()
     }
 

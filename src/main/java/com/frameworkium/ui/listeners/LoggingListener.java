@@ -13,6 +13,15 @@ public class LoggingListener implements WebDriverEventListener {
 
     private static final Logger logger = LogManager.getLogger();
 
+    private static String getLocatorFromElement(WebElement element) {
+        String str = element.toString();
+        Pattern p = Pattern.compile("->\\s(.*)(?=\\])");
+        Matcher m = p.matcher(str);
+        return m.find() && m.groupCount() > 0
+                ? m.group(1)
+                : str;
+    }
+
     @Override
     public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysSent) {
         logger.debug("changed value of element with " + getLocatorFromElement(element));
@@ -111,13 +120,24 @@ public class LoggingListener implements WebDriverEventListener {
         logger.trace("Event listener onException().", thrw);
     }
 
-    private String getLocatorFromElement(WebElement element) {
-        String str = element.toString();
-        Pattern p = Pattern.compile("->\\s(.*)(?=\\])");
-        Matcher m = p.matcher(str);
-        return m.find() && m.groupCount() > 0
-                ? m.group(1)
-                : str;
+    @Override
+    public <X> void beforeGetScreenshotAs(OutputType<X> outputType) {
+        logger.trace("Before get screenshot as");
+    }
+
+    @Override
+    public <X> void afterGetScreenshotAs(OutputType<X> outputType, X x) {
+        logger.trace("After get screenshot as");
+    }
+
+    @Override
+    public void beforeGetText(WebElement webElement, WebDriver webDriver) {
+        logger.trace("Before get text");
+    }
+
+    @Override
+    public void afterGetText(WebElement webElement, WebDriver webDriver, String s) {
+        logger.trace("After get text");
     }
 
     @Override

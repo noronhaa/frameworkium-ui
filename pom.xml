@@ -48,12 +48,12 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>3.11.0</version>
+      <version>3.13.0</version>
     </dependency>
     <dependency>
       <groupId>io.appium</groupId>
       <artifactId>java-client</artifactId>
-      <version>5.0.4</version>
+      <version>6.1.0</version>
       <exclusions>
         <exclusion>
           <groupId>cglib</groupId>
@@ -75,7 +75,7 @@
     <dependency>
       <groupId>com.saucelabs</groupId>
       <artifactId>saucerest</artifactId>
-      <version>1.0.36</version>
+      <version>1.0.39</version>
     </dependency>
     <dependency>
       <groupId>com.paulhammant</groupId>
@@ -85,12 +85,12 @@
     <dependency>
       <groupId>ru.yandex.qatools.htmlelements</groupId>
       <artifactId>htmlelements-java</artifactId>
-      <version>1.18</version>
+      <version>1.19</version>
     </dependency>
     <dependency>
       <groupId>com.google.truth</groupId>
       <artifactId>truth</artifactId>
-      <version>0.39</version>
+      <version>0.42</version>
       <scope>test</scope>
     </dependency>
 
@@ -259,7 +259,7 @@
               <dependency>
                 <groupId>com.puppycrawl.tools</groupId>
                 <artifactId>checkstyle</artifactId>
-                <version>8.8</version>
+                <version>8.11</version>
               </dependency>
             </dependencies>
             <configuration>

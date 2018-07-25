@@ -69,7 +69,8 @@ public abstract class AbstractDriver implements Driver {
         }
     }
 
-    private Proxy createProxy(String proxyProperty) {
+    // static to allow for easy testing
+    private static Proxy createProxy(String proxyProperty) {
         Proxy proxy = new Proxy();
         switch (proxyProperty.toLowerCase()) {
             case "system":
@@ -90,7 +91,8 @@ public abstract class AbstractDriver implements Driver {
         return proxy;
     }
 
-    private Proxy createManualProxy(String proxyProperty) {
+    // static to allow for easy testing
+    private static Proxy createManualProxy(String proxyProperty) {
         String proxyString = getProxyURL(proxyProperty);
         Proxy proxy = new Proxy();
         proxy.setProxyType(ProxyType.MANUAL)
@@ -101,7 +103,8 @@ public abstract class AbstractDriver implements Driver {
         return proxy;
     }
 
-    private String getProxyURL(String proxyProperty) {
+    // static to allow for easy testing
+    private static String getProxyURL(String proxyProperty) {
         try {
             URI proxyURI = new URI(proxyProperty);
             String host = proxyURI.getHost();

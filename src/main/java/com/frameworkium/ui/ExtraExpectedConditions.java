@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  */
 public class ExtraExpectedConditions {
 
-    private ExtraExpectedConditions() {
+    protected ExtraExpectedConditions() {
         // hide default constructor for this util class
     }
 

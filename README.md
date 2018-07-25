@@ -1,11 +1,11 @@
 # frameworkium-ui
 
-### Frameworkium 3
+## Frameworkium 3
 
 This is one of the Frameworkium 3 libraries. Frameworkium 3 is a new release of [frameworkium-core](https://github.com/Frameworkium/frameworkium-core) aka Frameworkium 2.
  In Frameworkium 3 we have split the project up into their own logical modules that can be used independently of the other modules. 
  
- Original Framewokium 2 docs [here]()
+ Original Frameworkium 2 docs [here]()
  
  Frameworkium 3 libraries:
  1. [frameworkium-ui](https://github.com/Frameworkium/frameworkium-ui)
@@ -16,8 +16,6 @@ This is one of the Frameworkium 3 libraries. Frameworkium 3 is a new release of 
  Example Projects implementing Frameworkium 3:
  - [frameworkium-examples](https://github.com/Frameworkium/frameworkium-examples/tree/frameworkium3)
  - [frameworkium-bdd](https://github.com/Frameworkium/frameworkium-bdd/tree/frameworkium3)
-
-***
 
 ## Contents
 - [Summary](#summary)
@@ -30,8 +28,7 @@ This is one of the Frameworkium 3 libraries. Frameworkium 3 is a new release of 
     - [Page waits & @Visible annotations](#page-waits-and-visible-annotations)
     - [Logging](#logging)
     - [Custom Browser Implementations](#custom-browser-implementations)
-    - [Using Config file instead of CLI parameters](#using-config-file-instead-of-cli-parameters)
-    - [Automatically Downloading Webdrivers](#automatically-downloading-webdrivers)
+    - [Using Config file instead of CLI parameters](#config-file-instead-of-cli-parameters)
 - [Contributions](#contributions)
 
 ## Summary
@@ -47,21 +44,25 @@ up and running faster, more reliably and being able to start writing tests insta
 - Parallel Execution of tests (with or without selenium grid)
 
 ### Technologies used / supported
+
 frameworkium-ui is build with and uses the following technologies
 - Java
 - TestNG
 - Maven
 
-frameworkium-ui can also be used with **Cucumber-JVM**, for more details head to the [frameworkium-bdd](https://github.com/Frameworkium/frameworkium-bdd/tree/frameworkium3)
-project
+frameworkium-ui can also be used with **Cucumber-JVM**, for more details head to
+the [frameworkium-bdd](https://github.com/Frameworkium/frameworkium-bdd/tree/frameworkium3)
+project.
 
-Note: **JUnit** support coming soon
+Note: **JUnit** support coming soon.
 
 ## Getting Started
 
-**Note:** we have setup a full example project of how to set up a project using frameworkium libraries including a
-fully implemented test suite. visit [frameworkium-examples](https://github.com/Frameworkium/frameworkium-examples/tree/frameworkium3). 
-you can even clone this project and add packages for your own project to this to get started or follow the steps below
+**Note:** we have setup a full example project of how to set up a project using
+frameworkium libraries including a fully implemented test suite.
+Visit [frameworkium-examples](https://github.com/Frameworkium/frameworkium-examples/tree/frameworkium3).
+you can even clone this project and add packages for your own project to this
+to get started or follow the steps below:
 
  1. Start a new Java Maven project (this can be done thought an IDE such as [IntelliJ](https://www.jetbrains.com/idea/))
  2. Add frameworkium-ui dependency to your pom
@@ -84,7 +85,7 @@ public class HomePage extends BasePage<HomePage> {
  
  }
 ```
-5. Have each **Test Class**  extend extend frameworkium-ui's `com.frameworkium.ui.tests.BaseUITest`
+5. Have each **Test Class** extend extend frameworkium-ui's `com.frameworkium.ui.tests.BaseUITest`
 
  ```java
 import com.frameworkium.ui.tests.BaseUITest;
@@ -137,10 +138,13 @@ public class HomePageTests extends BaseUITest{
   </profiles>
 ```
 
-7. You are now set up to run tests, once you have have written your first test run `mvn clean test` from the command line
+7. You are now set up to run tests, once you have have written your first
+test run `mvn clean test` from the command line.
 
 ## Selenium Grid
-Providing you have already set up selenium grid you can run your tests on the grid with frameworkium-ui by specifying the gridURL parameter at runtime:
+
+Providing you have already set up selenium grid you can run your tests on
+the grid with frameworkium-ui by specifying the gridURL parameter at runtime:
 
 ```bash
 mvn clean verify -DgridURL=http://someurl:4444/wd/hub
@@ -154,7 +158,7 @@ The [Selenium Grid Extras](https://github.com/groupon/Selenium-Grid-Extras) proj
 You just run (or have a batch script set up to automatically run).
 
 ```bash
-java -jar SeleniumGridExtras-1.7.1-SNAPSHOT-jar-with-dependencies.jar
+java -jar SeleniumGridExtras-1.7.1-jar-with-dependencies.jar
 ```
 
 and it handles the rest.
@@ -177,14 +181,17 @@ TestNG test lifecycle which allows us to setup a driver `@BeforeMethod` and clos
 `@AfterMethod` (a test is mapped as a method with TestNG)
 
 ##### BasePage
+
 We have functionality here that can run each time a new page is loaded (ie you load a new Page Object class) which 
 will can then wait for the visible elements on that page to be loaded and visible
 
 ##### Listeners
+
 We also make use of 'listeners' which hook onto TestNG tests and can react accordingly, for example taking a screenshot 
 if a test has failed.
 
-##### Parameterization
+##### Parametrisation
+
 Functionality where necessary has been parametrized to give the end user flexibility to choose how to use features.
 To communicate back options, system properties are used which are injected at runtime. 
 
@@ -201,6 +208,7 @@ Full list of CLI options below.
 See [the default driver implementations][driver-impl] used in frameworkium-ui for a list of the supported browsers.
 
 ## Command Line Options
+
 Tests can be executed by running `mvn clean verify`.
 This can be followed by any properties, in the form `-DpropertyName=value`,
 you wish to specify.
@@ -334,6 +342,7 @@ and [SauceLabs](https://saucelabs.com/platforms/) platform lists.
 
 ## Features
 ### Page waits and @visible annotations
+
 **Only use waits in your Page Object - _never_ in your tests**
 
 Everytime you load a new page, frameworkium-ui will automatically wait for that page to load, we can make more reliable 
@@ -342,17 +351,23 @@ for the visibility of all elements that have been tagged `@Visible` to be visibl
 you should not need any explicit waits
 
 #### Related annotations
+
 - `@Visible` - covered above - make sure element is visible when page loads
 - `@Invisible` - make sure element is **not** visible when page loads
 - `@ForceVisible` - attempt to force visibility of a hidden element when a page loads so we can interact with it
 
-#### Visibility of a list<Webelement> or a table?
-We may want to check for visibility of a table/list, however, we don't want to spend time checking each element in the table is 
-visible (could take a long time for large lists). For this we can parse a parameter to the annotation: 
-`@Visible(checkAtMost=1)` which will check 1 element (or any amount chosen) in the list for visibility. Parameter works for all visibility annotations
+#### Visibility of a List<WebElement> or a table?
+
+We may want to check for visibility of a table/list, however, we don't want
+to spend time checking each element in the table is visible
+(could take a long time for large lists).
+For this we can parse a parameter to the annotation:
+`@Visible(checkAtMost=1)` which will check 1 element (or any amount chosen)
+in the list for visibility. Parameter works for all visibility annotations
 
 
 #### Explicit waits
+
 However - there are times when you'll need to wait explicitly. For example:
 
  - we want to click a button
@@ -380,14 +395,18 @@ public Page clickInitiallyHiddenButton() {
 ```
 
 `ExpectedConditions` has lots of methods to help your waits - e.g.
-`elementToBeSelected()`, `titleContains()`, `textToBePresentInElement()`, `textToBePresentInElementValue()`, etc. - see [here](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html) for the full list.
+`elementToBeSelected()`, `titleContains()`, `textToBePresentInElement()`,
+`textToBePresentInElementValue()`, etc. - see
+[here](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html)
+for the full list.
 
 We have introduced our own extension to `ExpectedConditions` called `ExtraExpectedConditions`.
 
 NB - frameworkium-ui has implicit waits due to our use of HtmlElements.
 
 ### Logging
-Each test run generates a log as defined in the log4j.xml
+
+Each test run generates a log as defined in the log4j.xml.
 
 By default, all contents will push to `frameworkium.log`, in the `/logs/` folder.
 
@@ -505,20 +524,13 @@ and you'd then use this config file by running:
 mvn clean verify -Dconfig=FirefoxGrid.yaml
 ```
 
-### Automatically Downloading WebDrivers
-Since: 2.4.4
-
-frameworkium-ui supports the driver-binary-downloader Maven plugin, which allows the automatic download of webdriver binaries from the Internet i.e.:
-
-mvn driver-binary-downloader:selenium
-The default parameters store the latest 64-bit drivers for the current OS under the drivers/bin/ directory. The configuration options can be parameterised to select specific versions, different operating systems etc. If all requested drivers are already present under the designated directory, then no further actions take place at the back of this goal.
-
-For further information, visit the plugin's GitHub page.
-
 ### Contributions
+
 To Contribute:
 - Implement the feature on a branch
 - When all tests are passing, submit a pull request
 - Coding standards, based on the [Google Style Guide](https://github.com/google/styleguide) are enforced using Checkstyle.
- Formatters for Eclipse and IntelliJ are provided in the doc/style folder. Please refer to guides on how to import these in [Eclipse](https://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Freference%2Fpreferences%2Fjava%2Fcodestyle%2Fref-preferences-formatter.htm) and [Intellij](https://blog.jetbrains.com/idea/2014/01/intellij-idea-13-importing-code-formatter-settings-from-eclipse/). CheckStyle plugins also exist for both IDEs.
-
+ Formatters for Eclipse and IntelliJ are provided in the doc/style folder.
+ Please refer to guides on how to import these in [Eclipse](https://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Freference%2Fpreferences%2Fjava%2Fcodestyle%2Fref-preferences-formatter.htm)
+ and [Intellij](https://blog.jetbrains.com/idea/2014/01/intellij-idea-13-importing-code-formatter-settings-from-eclipse/).
+ CheckStyle plugins also exist for both IDEs.

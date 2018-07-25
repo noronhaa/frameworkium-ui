@@ -15,7 +15,6 @@ public class HomePage extends BasePage<HomePage> {
     @Visible
     private HeaderComponent header;
 
-    @Visible
     @FindBy(css = "form[class*='signup'] button")
     private WebElement signUpButton;
 

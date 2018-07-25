@@ -24,17 +24,17 @@ public class LoggingListener implements WebDriverEventListener {
 
     @Override
     public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysSent) {
-        logger.debug("changed value of element with " + getLocatorFromElement(element));
+        logger.debug(() -> "changed value of element with " + getLocatorFromElement(element));
     }
 
     @Override
     public void afterClickOn(WebElement element, WebDriver driver) {
-        logger.debug("clicked element with " + getLocatorFromElement(element));
+        logger.debug(() -> "clicked element with " + getLocatorFromElement(element));
     }
 
     @Override
     public void afterFindBy(By by, WebElement element, WebDriver driver) {
-        logger.debug("found element " + by);
+        logger.debug("found element {}", by);
     }
 
     @Override
@@ -59,14 +59,14 @@ public class LoggingListener implements WebDriverEventListener {
 
     @Override
     public void afterNavigateTo(String url, WebDriver driver) {
-        logger.debug("navigated to " + url);
+        logger.debug("navigated to {}", url);
     }
 
     @Override
     public void afterScript(String script, WebDriver driver) {
         // Only log part of a long script
         // We already log the entire script in beforeScript
-        logger.debug("ran script " + StringUtils.abbreviate(script, 128));
+        logger.debug(() -> "ran script " + StringUtils.abbreviate(script, 128));
     }
 
     @Override
@@ -81,17 +81,17 @@ public class LoggingListener implements WebDriverEventListener {
 
     @Override
     public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-        logger.debug("change value of element with " + getLocatorFromElement(element));
+        logger.debug(() -> "change value of element with " + getLocatorFromElement(element));
     }
 
     @Override
     public void beforeClickOn(WebElement element, WebDriver driver) {
-        logger.debug("click element with " + getLocatorFromElement(element));
+        logger.debug(() -> "click element with " + getLocatorFromElement(element));
     }
 
     @Override
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-        logger.debug("find element " + by);
+        logger.debug("before find element by {}", by);
     }
 
     @Override

@@ -75,10 +75,12 @@ public final class Visibility {
     private List<Field> getDeclaredFieldsIncludingSuperClasses(Class<?> clazz) {
         final List<Field> fields = new ArrayList<>();
 
-        for (Class<?> c = clazz;
-                ((c != null) && (c != BasePage.class) && (c != HtmlElement.class));
-                c = c.getSuperclass()) {
+        Class<?> c = clazz;
+        while (c != null
+                && c != BasePage.class
+                && c != HtmlElement.class) {
             fields.addAll(Arrays.asList(c.getDeclaredFields()));
+            c = c.getSuperclass();
         }
         return fields;
     }

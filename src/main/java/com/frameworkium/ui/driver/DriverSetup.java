@@ -7,7 +7,6 @@ import com.frameworkium.ui.driver.remotes.Sauce;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Capabilities;
-import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -87,9 +86,9 @@ public class DriverSetup {
                             .getDeclaredConstructor()
                             .newInstance();
                 } catch (InstantiationException | IllegalAccessException
-                        | NoSuchMethodException | InvocationTargetException e) {
-                    throw new RuntimeException(
-                            "Unable to use custom browser implementation - " + customBrowserImpl, e);
+                        | NoSuchMethodException | InvocationTargetException ex) {
+                    throw new IllegalArgumentException(
+                            "Unable to use custom browser implementation - " + customBrowserImpl, ex);
                 }
             default:
                 throw new IllegalArgumentException("Invalid Browser specified");
@@ -131,19 +130,26 @@ public class DriverSetup {
     }
 
     /**
-     * Returns custom AbstractDriver implementation based on class simple name.
-     * Uses reflections library to find options and chooses the first found.
+     * Returns custom Driver implementation based on class name.
      *
-     * @param implClassName the name of custom browser impl class (SimpleName, not full path)
-     * @return Class implementing AbstractDriver interface
+     * @param implClassName fully qualified name of custom browser impl class
+     * @return Class implementing the Driver interface
      */
-    private static Class<? extends AbstractDriver> getCustomBrowserImpl(String implClassName) {
-        return new Reflections("")
-                .getSubTypesOf(AbstractDriver.class)
-                .stream()
-                .filter(s -> s.getSimpleName().equals(implClassName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Problem loading custom browser implementation: " + implClassName));
+    private Class<? extends Driver> getCustomBrowserImpl(String implClassName) {
+        try {
+            return Class.forName(implClassName).asSubclass(Driver.class);
+        } catch (ClassNotFoundException ex) {
+            String message = "Failed to find custom browser implementation class: " + implClassName;
+            logger.fatal(message, ex);
+            throw new IllegalArgumentException(message
+                    + "\nFully qualified class name is required. "
+                    + "e.g. com.frameworkium.ui.MyCustomImpl");
+        } catch (ClassCastException ex) {
+            String message = String.format(
+                    "Custom browser implementation class '%s' does not implement the Driver interface.",
+                    implClassName);
+            logger.fatal(message, ex);
+            throw new IllegalArgumentException(message, ex);
+        }
     }
 }

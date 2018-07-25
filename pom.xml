@@ -113,12 +113,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <!--ONLYUSED FOR 1 METHOD IN DRIVERSETUP....-->
-    <dependency>
-      <groupId>org.reflections</groupId>
-      <artifactId>reflections</artifactId>
-      <version>0.9.11</version>
-    </dependency>
   </dependencies>
 
   <profiles>

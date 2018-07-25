@@ -412,19 +412,24 @@ public class SomeClass extends BasePage { // Or BaseTest
 ### Custom Browser Implementations
 
 Sometimes, one needs to open browsers and devices with certain capabilities and flags set.
-This is achieved in the WebDriver protocol by `DesiredCapabilties`, 
+This is achieved in the WebDriver protocol by `DesiredCapabilities`,
 and frameworkium provides a simple mechanism to set these, 
 whilst continuing to handle the eventual browser instantiation behind the scenes.
 
-The solution is to create a new Java class extending `AbstractDriver`
-somewhere in your test code, which sets up the DesiredCapabilities and WebDriver as you require them;
-then reference this class (by name) using the `-DcustomBrowserImpl` parameter at runtime.
+The solution is to create a new Java class extending `AbstractDriver`, or at least
+implementing the `Driver` interface, somewhere in your test code.
+This sets up the `DesiredCapabilities` and `WebDriver` as you require them;
+then reference this class (by fully qualified name) using the
+`-DcustomBrowserImpl` parameter at runtime.
 
-#### Running chrome in incognito mode example:
+e.g. `-DcustomBrowserImpl=my.package.ui.MyCustomBrowserImpl`
+
+#### Running Chrome in incognito mode example:
 
 Example would be to create the class `ChromeIncognitoImpl.java` somewhere in your test code:
 
 ```java
+package somewhere;
 public class ChromeIncognitoImpl extends AbstractDriver {
 
     @Override
@@ -445,7 +450,7 @@ public class ChromeIncognitoImpl extends AbstractDriver {
 
 Then run your tests with:
 
-`mvn clean verify -DcustomBrowserImpl=ChromeIncognitoImpl`
+`mvn clean verify -DcustomBrowserImpl=somewhere.ChromeIncognitoImpl`
 
 Whenever `-DcustomBrowserImpl` is provided, the browser parameter defaults to `custom`.
 
@@ -453,7 +458,9 @@ See [the default driver implementations][driver-impl] used in frameworkium-ui.
 If you create a better default implementation (or just something cool) please submit a pull request.
 
 [driver-impl]: https://github.com/Frameworkium/frameworkium-ui/tree/master/src/main/java/com/frameworkium/ui/driver/drivers
-### Using Config file instead of CLI parameters
+
+### Config File Instead of CLI Parameters
+
 Rather than providing all of the details in the command line,
 you can instead create config files (in your `resources` folder) to store common configurations.
 An example would be:

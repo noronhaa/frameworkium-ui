@@ -4,16 +4,14 @@ import com.frameworkium.ui.ExtraExpectedConditions;
 import com.frameworkium.ui.annotations.*;
 import com.frameworkium.ui.driver.WebDriverWrapper;
 import com.frameworkium.ui.tests.BaseUITest;
-import javassist.Modifier;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Wait;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Modifier;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

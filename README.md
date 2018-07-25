@@ -1,21 +1,37 @@
-# frameworkium-ui
+# Frameworkium UI
+
+[![CI Status][status-svg]][status]
+[![codecov.io][codecov-svg]][codecov]
+[![Maintainability][cc-badge]][codeclimate]
+
+This is the Frameworkium 3 UI module.
+
+It contains code to provide structure to Selenium-based UI tests.
+
+[status-svg]: https://travis-ci.org/Frameworkium/frameworkium-ui.svg?branch=master
+[status]: https://travis-ci.org/Frameworkium/frameworkium-ui
+[codecov-svg]: https://codecov.io/gh/Frameworkium/frameworkium-ui/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/Frameworkium/frameworkium-ui
+[codeclimate]: https://codeclimate.com/github/Frameworkium/frameworkium-ui/maintainability
+[cc-badge]: https://api.codeclimate.com/v1/badges/77fabac334cd08f25237/maintainability
 
 ## Frameworkium 3
 
-This is one of the Frameworkium 3 libraries. Frameworkium 3 is a new release of [frameworkium-core](https://github.com/Frameworkium/frameworkium-core) aka Frameworkium 2.
+This is one of the Frameworkium 3 libraries. Frameworkium 3 is a new release of
+[frameworkium-core][core] aka Frameworkium 2.
  In Frameworkium 3 we have split the project up into their own logical modules that can be used independently of the other modules. 
  
  Original Frameworkium 2 docs [here]()
  
  Frameworkium 3 libraries:
- 1. [frameworkium-ui](https://github.com/Frameworkium/frameworkium-ui)
- 2. [frameworkium-api](https://github.com/Frameworkium/frameworkium-api)
- 3. [frameworkium-reporting](https://github.com/Frameworkium/frameworkium-reporting)
- 4. [frameworkium-jira](https://github.com/Frameworkium/frameworkium-jira)  
+ 1. [frameworkium-ui][ui]
+ 2. [frameworkium-api][api]
+ 3. [frameworkium-reporting][reporting]
+ 4. [frameworkium-jira][jira]  
  
  Example Projects implementing Frameworkium 3:
- - [frameworkium-examples](https://github.com/Frameworkium/frameworkium-examples/tree/frameworkium3)
- - [frameworkium-bdd](https://github.com/Frameworkium/frameworkium-bdd/tree/frameworkium3)
+ - [frameworkium-examples][examples]
+ - [frameworkium-bdd][bdd]
 
 ## Contents
 - [Summary](#summary)
@@ -51,8 +67,7 @@ frameworkium-ui is build with and uses the following technologies
 - Maven
 
 frameworkium-ui can also be used with **Cucumber-JVM**, for more details head to
-the [frameworkium-bdd](https://github.com/Frameworkium/frameworkium-bdd/tree/frameworkium3)
-project.
+the [frameworkium-bdd][bdd] project.
 
 Note: **JUnit** support coming soon.
 
@@ -60,7 +75,7 @@ Note: **JUnit** support coming soon.
 
 **Note:** we have setup a full example project of how to set up a project using
 frameworkium libraries including a fully implemented test suite.
-Visit [frameworkium-examples](https://github.com/Frameworkium/frameworkium-examples/tree/frameworkium3).
+Visit [frameworkium-examples][examples].
 you can even clone this project and add packages for your own project to this
 to get started or follow the steps below:
 
@@ -76,14 +91,15 @@ to get started or follow the steps below:
  </dependencies>
  ```
  
- 3. Start laying out your project in accordance to the Page Object model (See [Layers](https://frameworkium.github.io/#_pages/Layers.md) section for more info) 
+ 3. Start laying out your project in accordance to the Page Object model
+ (See the [Layers](https://frameworkium.github.io/#_pages/Layers.md) section for more info) 
  4. Have each **Page Object Class** extend frameworkium-ui's `com.frameworkium.ui.pages.BasePage<T>`
 ```java
 import com.frameworkium.ui.pages.BasePage;
  
 public class HomePage extends BasePage<HomePage> {
  
- }
+}
 ```
 5. Have each **Test Class** extend extend frameworkium-ui's `com.frameworkium.ui.tests.BaseUITest`
 
@@ -94,48 +110,49 @@ public class HomePageTests extends BaseUITest{
     
 }
 ```
-6. Create a Profile in your `pom.xml` to run your tests containing a compiler and surefire plugin like so
+6. Create a Profile in your `pom.xml` to run your tests containing a 
+compiler and surefire plugin like so:
 
 ```xml
 <profiles>
-    <profile>
-      <id>tests</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
+  <profile>
+    <id>tests</id>
+    <activation>
+      <activeByDefault>true</activeByDefault>
+    </activation>
+    <build>
+      <plugins>
 
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.6.0</version>
-            <configuration>
-              <source>1.8</source>
-              <target>1.8</target>
-            </configuration>
-          </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.6.0</version>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
 
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.21.0</version>
-            <configuration>
-              <parallel>methods</parallel>
-              <threadCount>${threads}</threadCount>
-              <includes>
-                <include>**/*Test.java</include>
-                <include>**/*Tests.java</include>
-              </includes>
-              <groups>${groups}</groups>
-              <testFailureIgnore>false</testFailureIgnore>
-            </configuration>
-          </plugin>
-
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.21.0</version>
+          <configuration>
+            <parallel>methods</parallel>
+            <threadCount>${threads}</threadCount>
+            <includes>
+              <include>**/*Test.java</include>
+              <include>**/*Tests.java</include>
+            </includes>
+            <groups>${groups}</groups>
+            <testFailureIgnore>false</testFailureIgnore>
+          </configuration>
+        </plugin>
+        
+      </plugins>
+    </build>
+  </profile>
+</profiles>
 ```
 
 7. You are now set up to run tests, once you have have written your first
@@ -150,11 +167,12 @@ the grid with frameworkium-ui by specifying the gridURL parameter at runtime:
 mvn clean verify -DgridURL=http://someurl:4444/wd/hub
 ```
 
-Setting up a grid using the selenium standalone jar is easy enough, but managing larger grids,
-and updating the dependencies along the way (e.g. DriverServer, jars, paths etc.) 
-on each of your nodes can be a bit of a pain.
+Setting up a grid using the selenium standalone jar is easy enough, but managing
+larger grids, and updating the dependencies along the way 
+(e.g. DriverServer, jars, paths etc.) on each of your nodes can be a bit of a pain.
 
-The [Selenium Grid Extras](https://github.com/groupon/Selenium-Grid-Extras) project aims to take the pain out of this.
+The [Selenium Grid Extras](https://github.com/groupon/Selenium-Grid-Extras)
+project aims to take the pain out of this.
 You just run (or have a batch script set up to automatically run).
 
 ```bash
@@ -162,50 +180,58 @@ java -jar SeleniumGridExtras-1.7.1-jar-with-dependencies.jar
 ```
 
 and it handles the rest.
+
 It can set up nodes, hubs, or combined hubs and nodes; records videos of the executions,
-automatically installs and configures all the drivers you'll need (and auto-update them to the latest versions),
-kill stale sessions and broken browsers, and even periodically reboot machines to keep your grid up with minimal maintenance.
+automatically installs and configures all the drivers you'll need (and auto-update
+them to the latest versions), kill stale sessions and broken browsers, and even
+periodically reboot machines to keep your grid up with minimal maintenance.
 
-Download the latest version from <https://github.com/groupon/Selenium-Grid-Extras/releases>.
+Download the latest version from:
+<https://github.com/groupon/Selenium-Grid-Extras/releases>.
 
-## frameworkium-ui Structure
+## Frameworkium-ui Structure
 
-Frameworkium functionality comes from writing page objects and tests that
+Frameworkium functionality comes from writing Page Objects and Tests that
 extend `BasePage` and `BaseUITest` respectively.
 
 ##### BaseUITest
 
-This means when your test class is executed it will also run code from `BaseUITest`.
-Code here is hooked onto TestNG for example we will have code run at different points of the 
-TestNG test lifecycle which allows us to setup a driver `@BeforeMethod` and close the driver
-`@AfterMethod` (a test is mapped as a method with TestNG)
+This means when your test class is executed it will also run code from
+`BaseUITest`. Code here is hooked onto TestNG for example we will have code
+run at different points of the TestNG test lifecycle which allows us to setup 
+a driver `@BeforeMethod` and quit the driver `@AfterMethod` 
+ (a test is mapped as a method with TestNG)
 
 ##### BasePage
 
-We have functionality here that can run each time a new page is loaded (ie you load a new Page Object class) which 
-will can then wait for the visible elements on that page to be loaded and visible
+We have functionality here that can run each time a new page is loaded
+(i.e. you load a new Page Object class) which will can then wait for the
+visible elements on that page to be loaded and visible.
 
 ##### Listeners
 
-We also make use of 'listeners' which hook onto TestNG tests and can react accordingly, for example taking a screenshot 
-if a test has failed.
+We also make use of 'listeners' which hook onto TestNG tests and can react
+accordingly, for example taking a screenshot if a test has failed.
 
 ##### Parametrisation
 
-Functionality where necessary has been parametrized to give the end user flexibility to choose how to use features.
-To communicate back options, system properties are used which are injected at runtime. 
+Functionality where necessary has been parametrized to give the end user
+flexibility to choose how to use features. To communicate back options,
+system properties are used which are injected at runtime. 
 
 For example if you want to 
-use chrome browser instead of firefox just parse `mvn clean test -Dbrowser=chrome` on the commandline when running tests. 
+use chrome browser instead of firefox just parse `mvn clean test -Dbrowser=chrome`
+on the commandline when running tests. 
 
-Want to run parallel execution
-with 2 threads? just parse `mvn clean test -Dthreads=2` and frameworkium takes care of all the logic.
+Want to run parallel execution with 2 threads?
+Just run `mvn clean test -Dthreads=2` and frameworkium takes care of it.
 
-Full list of CLI options below.
+For a full list of CLI options, see below.
 
 ## Supported Browsers
 
-See [the default driver implementations][driver-impl] used in frameworkium-ui for a list of the supported browsers.
+See [the default driver implementations][driver-impl] used in frameworkium-ui
+for a list of the supported browsers.
 
 ## Command Line Options
 
@@ -345,16 +371,19 @@ and [SauceLabs](https://saucelabs.com/platforms/) platform lists.
 
 **Only use waits in your Page Object - _never_ in your tests**
 
-Everytime you load a new page, frameworkium-ui will automatically wait for that page to load, we can make more reliable 
-by using the `@Visible` annotation above various page objects, when the new page load frameworkium-ui will wait
-for the visibility of all elements that have been tagged `@Visible` to be visible before continuing the test. This means
-you should not need any explicit waits
+Everytime you load a new page, frameworkium-ui will automatically wait for that
+page to load, we can make more reliable by using the `@Visible` annotation above
+various page objects, when the new page load frameworkium-ui will wait
+for the visibility of all elements that have been tagged `@Visible` to be
+visible before continuing the test.
+This means you should not need any explicit waits.
 
 #### Related annotations
 
 - `@Visible` - covered above - make sure element is visible when page loads
 - `@Invisible` - make sure element is **not** visible when page loads
-- `@ForceVisible` - attempt to force visibility of a hidden element when a page loads so we can interact with it
+- `@ForceVisible` - attempt to force visibility of a hidden element when a 
+  page loads so we can interact with it
 
 #### Visibility of a List<WebElement> or a table?
 
@@ -372,24 +401,25 @@ However - there are times when you'll need to wait explicitly. For example:
  - we want to click a button
  - the button is initially hidden; but made visible by linking the 'more' arrow
 
-So we want to click the 'more' arrow, then wait for the button to be visible before clicking on it.
+So we want to click the 'more' arrow, then wait for the button to be visible
+before clicking on it.
 We use `wait.until` and `ExpectedConditions`, as in the following example:
 
 ```java
-@Visible
-@Name("More Arrow")
-@FindBy(css = "div#more-arrow")
-private WebElement moreArrow;
-
-@Name("Initially hidden button")
-@FindBy(css = "div#button")
-private WebElement initiallyHiddenButton;
-
-public Page clickInitiallyHiddenButton() {
-  moreArrow.click();
-  wait.until(ExpectedConditions.visibilityOf(initiallyHiddenButton));
-  initiallyHiddenButton.click();
-  return this;
+public class MyPageObject extends BasePage<MyPageObject> {
+    @Visible
+    @FindBy(css = "div#more-arrow")
+    private WebElement moreArrow;
+    
+    @FindBy(css = "div#button")
+    private WebElement initiallyHiddenButton;
+    
+    public MyPageObject clickInitiallyHiddenButton() {
+      moreArrow.click();
+      wait.until(ExpectedConditions.visibilityOf(initiallyHiddenButton));
+      initiallyHiddenButton.click();
+      return this;
+    }
 }
 ```
 
@@ -407,10 +437,10 @@ NB - frameworkium-ui has implicit waits due to our use of HtmlElements.
 
 Each test run generates a log as defined in the log4j.xml.
 
-By default, all contents will push to `frameworkium.log`, in the `/logs/` folder.
+By default, all contents will write to `frameworkium.log`, in the `logs` folder.
 
-If you want to write to this log (useful for debugging),
-you should instantiate a new `Logger` in the class from which you're logging. E.g.:
+If you want to write to this log (useful for debugging), you should instantiate
+a new `Logger` in the class from which you're logging e.g.:
 
 ```java
 import org.apache.logging.log4j.LogManager;
@@ -421,9 +451,9 @@ public class SomeClass extends BasePage { // Or BaseUITest
     private Logger logger = LogManager.getLogger(SomeClass.class);
     
     public void someMethod() {
+        logger.debug("I'm logging a debug message");
         logger.info("I'm logging an info message");
         logger.warn("I'm logging a warn message");
-        logger.debug("I'm logging a debug message");
         logger.error("I'm logging an error message");
     }
 }
@@ -431,8 +461,8 @@ public class SomeClass extends BasePage { // Or BaseUITest
 
 ### Custom Browser Implementations
 
-Sometimes, one needs to open browsers and devices with certain capabilities and flags set.
-This is achieved in the WebDriver protocol by `DesiredCapabilities`,
+Sometimes, one needs to open browsers and devices with certain capabilities and
+flags set. This is achieved in the WebDriver protocol by `DesiredCapabilities`,
 and frameworkium provides a simple mechanism to set these, 
 whilst continuing to handle the eventual browser instantiation behind the scenes.
 
@@ -446,7 +476,7 @@ e.g. `-DcustomBrowserImpl=my.package.ui.MyCustomBrowserImpl`
 
 #### Running Chrome in incognito mode example:
 
-Example would be to create the class `ChromeIncognitoImpl.java` somewhere in your test code:
+For example, create the class `ChromeIncognitoImpl.java` somewhere in your test code:
 
 ```java
 package somewhere;
@@ -475,17 +505,18 @@ Then run your tests with:
 Whenever `-DcustomBrowserImpl` is provided, the browser parameter defaults to `custom`.
 
 See [the default driver implementations][driver-impl] used in frameworkium-ui.
-If you create a better default implementation (or just something cool) please submit a pull request.
+If you create a better default implementation (or just something cool) please
+submit a pull request.
 
 [driver-impl]: https://github.com/Frameworkium/frameworkium-ui/tree/master/src/main/java/com/frameworkium/ui/driver/drivers
 
 ### Config File Instead of CLI Parameters
 
 Rather than providing all of the details in the command line,
-you can instead create config files (in your `resources` folder) to store common configurations.
-An example would be:
+you can instead create config files (in your `resources` folder) to store common
+configurations. An example would be:
 
-`/resources/config/FirefoxGrid.yaml`:
+`resources/config/FirefoxGrid.yaml`:
 
 ```yaml
 browser: Firefox
@@ -517,7 +548,7 @@ proxy:
 maxRetryCount: 2
 ```
 
-and you'd then use this config file by running:
+you could then use this config file by running:
 
 ```bash
 mvn clean verify -Dconfig=FirefoxGrid.yaml
@@ -530,6 +561,15 @@ To Contribute:
 - When all tests are passing, submit a pull request
 - Coding standards, based on the [Google Style Guide](https://github.com/google/styleguide) are enforced using Checkstyle.
  Formatters for Eclipse and IntelliJ are provided in the doc/style folder.
- Please refer to guides on how to import these in [Eclipse](https://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Freference%2Fpreferences%2Fjava%2Fcodestyle%2Fref-preferences-formatter.htm)
+ Please refer to guides on how to import these in
+ [Eclipse](https://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Freference%2Fpreferences%2Fjava%2Fcodestyle%2Fref-preferences-formatter.htm)
  and [Intellij](https://blog.jetbrains.com/idea/2014/01/intellij-idea-13-importing-code-formatter-settings-from-eclipse/).
  CheckStyle plugins also exist for both IDEs.
+
+[core]: https://github.com/Frameworkium/frameworkium-core
+[ui]: https://github.com/Frameworkium/frameworkium-ui
+[api]: https://github.com/Frameworkium/frameworkium-api
+[reporting]: https://github.com/Frameworkium/frameworkium-reporting
+[jira]: https://github.com/Frameworkium/frameworkium-jira
+[examples]: https://github.com/Frameworkium/frameworkium-examples/tree/frameworkium3
+[bdd]: https://github.com/Frameworkium/frameworkium-bdd/tree/frameworkium3

@@ -9,7 +9,7 @@ addons:
   firefox: latest
   chrome: stable
 
-install: true # disable default mvn install
+install: true # prevents the default mvn install from running
 
 notifications:
   slack:
@@ -36,11 +36,6 @@ before_script:
   # Setup X to allow non-headless browsers to run
   - export DISPLAY=:99.0
   - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16
-
-  # Set up code climate test reporter
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 
   # Set up Selenium Grid Hub
   - wget --quiet https://selenium-release.storage.googleapis.com/${SELENIUM_MAJ_VER}/${SELENIUM_JAR}
@@ -91,8 +86,3 @@ script:
 after_script:
   # Code coverage report
   - bash <(curl -s https://codecov.io/bash)
-
-  # Upload code coverage to code climate - with workaround for jacoco (Dec 2017)
-  - cp target/site/jacoco/jacoco.xml src/main/java/jacoco.xml
-  - cd src/main/java/
-  - ../../../cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT

@@ -1,9 +1,5 @@
 package com.frameworkium.ui.capture
 
-import com.frameworkium.ui.driver.WebDriverWrapper
-import org.openqa.selenium.StaleElementReferenceException
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.WebElement
 import spock.lang.Specification
 
 class ElementHighlighterSpec extends Specification {

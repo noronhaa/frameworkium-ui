@@ -11,7 +11,9 @@ class RetryFlakyTestSpec extends Specification {
             def mockResult = Mock(ITestResult)
             def sut = new RetryFlakyTest()
         expect:
-            RetryFlakyTest.MAX_RETRY_COUNT.times { assert sut.retry(mockResult) }
+            RetryFlakyTest.MAX_RETRY_COUNT.times {
+                assert sut.retry(mockResult)
+            }
             !sut.retry(mockResult)
     }
 }

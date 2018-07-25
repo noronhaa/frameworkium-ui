@@ -1,11 +1,11 @@
 package com.frameworkium.ui.pages
 
-//import com.frameworkium.ui.capture.ScreenshotCapture
 import com.frameworkium.ui.driver.Driver
+
+//import com.frameworkium.ui.capture.ScreenshotCapture
 import com.frameworkium.ui.driver.WebDriverWrapper
 import com.frameworkium.ui.pages.pageobjects.TestPage
 import com.frameworkium.ui.tests.BaseUITest
-import com.frameworkium.ui.pages.pageobjects.PageObjects
 import org.openqa.selenium.remote.RemoteWebDriver
 import org.openqa.selenium.support.ui.Clock
 import org.openqa.selenium.support.ui.FluentWait

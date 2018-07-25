@@ -1,10 +1,9 @@
 package com.frameworkium.ui.pages
 
-
 import com.frameworkium.ui.driver.Driver
 import com.frameworkium.ui.pages.Visibility
-import com.frameworkium.ui.tests.BaseUITest
 import com.frameworkium.ui.pages.pageobjects.PageObjects
+import com.frameworkium.ui.tests.BaseUITest
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.TimeoutException
 import org.openqa.selenium.WebDriver
@@ -130,7 +129,7 @@ class VisibilitySpec extends Specification {
     def "Waiting for Lists of Elements passes as expected where checkAtMost=2"() {
 
         given: "A page objects with Lists of Elements"
-        def pageObject = new PageObjects.ListOfElementsCheckAtMost()
+            def pageObject = new PageObjects.ListOfElementsCheckAtMost()
             pageObject.with {
                 visibles = [newVisibleElement(), newVisibleElement(), newNoInteractionElement()]
                 invisibles = [newInvisibleElement(), newInvisibleElement(), newNoInteractionElement()]

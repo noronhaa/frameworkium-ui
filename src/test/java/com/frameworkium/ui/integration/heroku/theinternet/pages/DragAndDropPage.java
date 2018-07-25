@@ -2,7 +2,6 @@ package com.frameworkium.ui.integration.heroku.theinternet.pages;
 
 import com.frameworkium.ui.annotations.Visible;
 import com.frameworkium.ui.pages.BasePage;
-
 import io.restassured.RestAssured;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -70,17 +69,14 @@ public class DragAndDropPage extends BasePage<DragAndDropPage> {
         executeJS("$('" + from + "').simulateDragDrop({ dropTarget: '" + to + "'});");
     }
 
-
     public DragAndDropPage dragAontoB() {
         simulateDragAndDrop("#column-a", "#column-b");
         return this;
     }
-
 
     public List<String> getListOfHeadings() {
         return boxes.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
-
 }

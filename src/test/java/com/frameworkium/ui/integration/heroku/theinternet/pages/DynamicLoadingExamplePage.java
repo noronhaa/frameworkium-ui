@@ -3,7 +3,6 @@ package com.frameworkium.ui.integration.heroku.theinternet.pages;
 import com.frameworkium.ui.annotations.Invisible;
 import com.frameworkium.ui.annotations.Visible;
 import com.frameworkium.ui.pages.BasePage;
-
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.annotations.Timeout;
@@ -25,13 +24,11 @@ public class DynamicLoadingExamplePage extends BasePage<DynamicLoadingExamplePag
     @FindBy(id = "finish")
     private HtmlElement dynamicElement;
 
-
     public DynamicLoadingExamplePage clickStart() {
         startButton.click();
         wait.until(visibilityOf(dynamicElement));
         return this;
     }
-
 
     public DynamicLoadingExamplePage waitForElementToBeDisplayed() {
         wait.until(visibilityOf(dynamicElement));
@@ -41,5 +38,4 @@ public class DynamicLoadingExamplePage extends BasePage<DynamicLoadingExamplePag
     public boolean isElementDisplayed() {
         return dynamicElement.isDisplayed();
     }
-
 }

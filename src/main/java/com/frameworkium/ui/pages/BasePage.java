@@ -14,7 +14,6 @@ import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 
 import java.time.Duration;
 import java.util.Observable;
-import java.util.Observer;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
@@ -165,8 +164,7 @@ public abstract class BasePage<T extends BasePage<T>> extends Observable {
         new ReflectionHelper().logPageToAllureIfUsing(getClass());
     }
 
-
-    //todo CAPTURE
+    // TODO: Capture
     //    private void takePageLoadedScreenshotAndSendToCapture() {s
     //        if (ScreenshotCapture.isRequired()) {
     //            Command pageLoadCommand = new Command(

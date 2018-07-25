@@ -365,7 +365,6 @@ For this we can parse a parameter to the annotation:
 `@Visible(checkAtMost=1)` which will check 1 element (or any amount chosen)
 in the list for visibility. Parameter works for all visibility annotations
 
-
 #### Explicit waits
 
 However - there are times when you'll need to wait explicitly. For example:

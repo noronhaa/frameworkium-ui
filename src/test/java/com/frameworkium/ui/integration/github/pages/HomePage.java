@@ -19,7 +19,6 @@ public class HomePage extends BasePage<HomePage> {
     @FindBy(css = "form[class*='signup'] button")
     private WebElement signUpButton;
 
-
     public static HomePage open() {
         return PageFactory.newInstance(HomePage.class, "https://github.com");
     }

@@ -3,7 +3,6 @@ package com.frameworkium.ui.integration.heroku.theinternet.pages;
 import com.frameworkium.ui.ExtraExpectedConditions;
 import com.frameworkium.ui.annotations.Visible;
 import com.frameworkium.ui.pages.BasePage;
-
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.CheckBox;
@@ -18,7 +17,6 @@ public class CheckboxesPage extends BasePage<CheckboxesPage> {
     @FindBy(css = "form input[type='checkbox']")
     private List<CheckBox> allCheckboxes;
 
-
     public CheckboxesPage checkAllCheckboxes() {
 
         allCheckboxes.forEach(CheckBox::select);
@@ -30,12 +28,10 @@ public class CheckboxesPage extends BasePage<CheckboxesPage> {
         return this;
     }
 
-
     public List<Boolean> getAllCheckboxCheckedStatus() {
 
         return allCheckboxes.stream()
                 .map(CheckBox::isSelected)
                 .collect(Collectors.toList());
     }
-
 }

@@ -1,8 +1,7 @@
 package com.frameworkium.ui.integration.heroku.theinternet.tests;
 
-import com.frameworkium.ui.tests.BaseUITest;
 import com.frameworkium.ui.integration.heroku.theinternet.pages.*;
-
+import com.frameworkium.ui.tests.BaseUITest;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
@@ -11,7 +10,6 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 
 public class TheInternetExampleTests extends BaseUITest {
-
 
     @Test(description = "Checkboxes")
     public void checkBoxes() {
@@ -27,7 +25,6 @@ public class TheInternetExampleTests extends BaseUITest {
                 .doesNotContain(false);
     }
 
-
     @Test(description = "Drag and Drop")
     public void dragAndDrop() {
 
@@ -40,7 +37,6 @@ public class TheInternetExampleTests extends BaseUITest {
                 .named("Order of headings")
                 .containsExactly("B", "A");
     }
-
 
     @Test(description = "Dynamic loading")
     public void dynamicLoading() {
@@ -58,7 +54,6 @@ public class TheInternetExampleTests extends BaseUITest {
                 .isTrue();
     }
 
-
     @Test(description = "Hovers")
     public void hovers() {
 
@@ -69,7 +64,6 @@ public class TheInternetExampleTests extends BaseUITest {
         assertThat(hoversPage.getFirstFigureCaption()).contains("name: user1");
 
     }
-
 
     @Test(description = "Javascript Alerts")
     public void javascriptAlerts() {
@@ -84,7 +78,6 @@ public class TheInternetExampleTests extends BaseUITest {
                 .isEqualTo("You successfuly clicked an alert");
     }
 
-
     @Test(description = "Key Presses")
     public void keypresses() {
 
@@ -97,7 +90,6 @@ public class TheInternetExampleTests extends BaseUITest {
         assertThat(keyPressesPage.getResultText())
                 .isEqualTo("You entered: " + Keys.ENTER.name());
     }
-
 
     @Test(description = "Table Manipulation & Validation")
     public void sortDataTable() {

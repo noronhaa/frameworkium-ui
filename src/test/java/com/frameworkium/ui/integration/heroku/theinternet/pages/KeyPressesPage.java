@@ -2,7 +2,6 @@ package com.frameworkium.ui.integration.heroku.theinternet.pages;
 
 import com.frameworkium.ui.annotations.Visible;
 import com.frameworkium.ui.pages.BasePage;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,7 +19,6 @@ public class KeyPressesPage extends BasePage<KeyPressesPage> {
     @FindBy(css = "p#result")
     private WebElement result;
 
-
     public KeyPressesPage enterKeyPress(Keys key) {
 
         (new Actions(driver)).sendKeys(key).perform();
@@ -28,7 +26,6 @@ public class KeyPressesPage extends BasePage<KeyPressesPage> {
         // We're still on this page, so return this
         return this;
     }
-
 
     public String getResultText() {
         return result.getText();

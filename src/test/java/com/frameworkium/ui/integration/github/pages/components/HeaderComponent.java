@@ -1,23 +1,17 @@
 package com.frameworkium.ui.integration.github.pages.components;
 
 import com.frameworkium.ui.annotations.Visible;
+import com.frameworkium.ui.integration.github.pages.ExplorePage;
+import com.frameworkium.ui.integration.github.pages.SearchResultsPage;
 import com.frameworkium.ui.pages.PageFactory;
 import com.frameworkium.ui.pages.Visibility;
 import com.frameworkium.ui.tests.BaseUITest;
-import com.frameworkium.ui.integration.github.pages.ExplorePage;
-import com.frameworkium.ui.integration.github.pages.SearchResultsPage;
-
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import ru.yandex.qatools.htmlelements.annotations.Name;
-import ru.yandex.qatools.htmlelements.element.Button;
-import ru.yandex.qatools.htmlelements.element.HtmlElement;
-import ru.yandex.qatools.htmlelements.element.Link;
-import ru.yandex.qatools.htmlelements.element.TextInput;
+import ru.yandex.qatools.htmlelements.element.*;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
@@ -61,20 +55,17 @@ public class HeaderComponent extends HtmlElement {
         }
     }
 
-
     public ExplorePage clickExplore() {
         showHeaderMenuIfCollapsed();
         exploreLink.click();
         return PageFactory.newInstance(ExplorePage.class);
     }
 
-
     public SearchResultsPage search(String searchText) {
         showHeaderMenuIfCollapsed();
         searchBox.sendKeys(searchText + Keys.ENTER);
         return PageFactory.newInstance(SearchResultsPage.class);
     }
-
 
     public void testForceVisible() {
         Wait<WebDriver> wait = BaseUITest.newDefaultWait();

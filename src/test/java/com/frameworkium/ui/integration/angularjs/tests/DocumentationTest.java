@@ -1,9 +1,8 @@
 package com.frameworkium.ui.integration.angularjs.tests;
 
 import com.frameworkium.base.RetryFlakyTest;
-import com.frameworkium.ui.tests.BaseUITest;
 import com.frameworkium.ui.integration.angularjs.pages.DeveloperGuidePage;
-
+import com.frameworkium.ui.tests.BaseUITest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

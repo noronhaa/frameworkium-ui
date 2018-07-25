@@ -3,9 +3,9 @@ package com.frameworkium.ui.tests;
 import com.frameworkium.base.ReflectionHelper;
 import com.frameworkium.base.properties.Property;
 import com.frameworkium.ui.browsers.UserAgent;
-//import com.frameworkium.ui.capture.ScreenshotCapture;
 import com.frameworkium.ui.driver.*;
-import com.frameworkium.ui.listeners.*;
+import com.frameworkium.ui.listeners.SauceLabsListener;
+import com.frameworkium.ui.listeners.ScreenshotListener;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
@@ -20,15 +20,15 @@ import org.testng.annotations.*;
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.Optional;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static java.util.Objects.isNull;
 
-@Listeners({ ScreenshotListener.class, SauceLabsListener.class })
+//import com.frameworkium.ui.capture.ScreenshotCapture;
+
+@Listeners({ScreenshotListener.class, SauceLabsListener.class})
 public abstract class BaseUITest implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     private static final Duration DEFAULT_TIMEOUT = Duration.of(10, SECONDS);

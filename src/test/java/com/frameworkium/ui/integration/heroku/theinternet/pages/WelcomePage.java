@@ -4,7 +4,6 @@ import com.frameworkium.ui.annotations.ForceVisible;
 import com.frameworkium.ui.annotations.Visible;
 import com.frameworkium.ui.pages.BasePage;
 import com.frameworkium.ui.pages.PageFactory;
-
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.Link;
@@ -46,7 +45,6 @@ public class WelcomePage extends BasePage<WelcomePage> {
     @FindBy(linkText = "Sortable Data Tables")
     private Link sortableDataTablesLink;
 
-
     public static WelcomePage open() {
         return PageFactory.newInstance(
                 WelcomePage.class, "http://the-internet.herokuapp.com");
@@ -66,7 +64,6 @@ public class WelcomePage extends BasePage<WelcomePage> {
                 Duration.of(timeout, SECONDS));
     }
 
-
     public CheckboxesPage clickCheckboxesLink() {
         // TODO: move both of these to a dedicated test
         logger.trace("Showing example use of the logger in BasePage");
@@ -78,36 +75,30 @@ public class WelcomePage extends BasePage<WelcomePage> {
                 CheckboxesPage.class, Duration.of(15, SECONDS));
     }
 
-
     public DragAndDropPage clickDragAndDropLink() {
         dragAndDropLink.click();
         return PageFactory.newInstance(DragAndDropPage.class);
     }
-
 
     public DynamicLoadingPage clickDynamicLoading() {
         dynamicLoadingLink.click();
         return PageFactory.newInstance(DynamicLoadingPage.class);
     }
 
-
     public HoversPage clickHoversLink() {
         hoversLink.click();
         return PageFactory.newInstance(HoversPage.class);
     }
-
 
     public JavaScriptAlertsPage clickJavascriptAlertsLink() {
         javascriptAlertsLink.click();
         return PageFactory.newInstance(JavaScriptAlertsPage.class);
     }
 
-
     public KeyPressesPage clickKeyPressesLink() {
         keyPressesLink.click();
         return PageFactory.newInstance(KeyPressesPage.class);
     }
-
 
     public SortableDataTablesPage clickSortableDataTablesLink() {
         sortableDataTablesLink.click();

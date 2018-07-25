@@ -1,8 +1,8 @@
 package com.frameworkium.ui.integration.github.tests;
 
 import com.frameworkium.ui.integration.github.pages.ExplorePage;
-import com.frameworkium.ui.tests.BaseUITest;
 import com.frameworkium.ui.integration.github.pages.HomePage;
+import com.frameworkium.ui.tests.BaseUITest;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -10,7 +10,6 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 
 public class ComponentExampleTest extends BaseUITest {
-
 
     @Test(description = "Simple test showing the use of components")
     public final void component_example_test() {
@@ -29,14 +28,12 @@ public class ComponentExampleTest extends BaseUITest {
         assertThat(searchResults).contains("SeleniumHQ/selenium");
     }
 
-
     @Test(description = "force visible makes hidden element visible")
     public void force_visible_makes_hidden_element_visible() {
         HomePage.open()
                 .with().theHeader()
                 .testForceVisible();
     }
-
 
     @Test(dependsOnMethods = {"force_visible_makes_hidden_element_visible"})
     public void ensure_BaseUITest_wait_is_updated_after_browser_reset() {

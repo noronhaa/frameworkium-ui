@@ -11,9 +11,7 @@ import org.testng.TestListenerAdapter;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
 import static com.frameworkium.base.properties.Property.BROWSER;
 import static com.frameworkium.ui.driver.DriverSetup.Browser.ELECTRON;
@@ -59,8 +57,6 @@ public class ScreenshotListener extends TestListenerAdapter {
         }
     }
 
-
-
     private boolean createScreenshotDirectory(Path screenshotDirectory) {
         try {
             Files.createDirectories(screenshotDirectory);
@@ -83,7 +79,6 @@ public class ScreenshotListener extends TestListenerAdapter {
 
         new ReflectionHelper().addScreenshotToAllureIfUsing("Failure Screenshot", screenshot);
     }
-
 
     private boolean isScreenshotSupported(ITestResult testResult) {
         boolean isElectron = BROWSER.isSpecified()

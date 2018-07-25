@@ -2,7 +2,6 @@ package com.frameworkium.ui.integration.heroku.theinternet.pages;
 
 import com.frameworkium.ui.annotations.Visible;
 import com.frameworkium.ui.pages.BasePage;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
@@ -21,14 +20,12 @@ public class JavaScriptAlertsPage extends BasePage<JavaScriptAlertsPage> {
     @FindBy(css = "p#result")
     private WebElement resultArea;
 
-
     public JavaScriptAlertsPage clickAlertButtonAndAccept() {
         jsAlertButton.click();
         driver.switchTo().alert().accept();
         wait.until(visibilityOf(resultArea));
         return this;
     }
-
 
     public String getResultText() {
         return resultArea.getText();

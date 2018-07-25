@@ -165,11 +165,13 @@ kill stale sessions and broken browsers, and even periodically reboot machines t
 Download the latest version from <https://github.com/groupon/Selenium-Grid-Extras/releases>.
 
 ## frameworkium-ui Structure
-#### How does frameworkium-ui work?
-Frameworkium functionality comes from extending `BasePage` and `BaseTest`. 
 
-##### BaseTest
-This means when your test class is executed it will also run code from BaseTest. 
+Frameworkium functionality comes from writing page objects and tests that
+extend `BasePage` and `BaseUITest` respectively.
+
+##### BaseUITest
+
+This means when your test class is executed it will also run code from `BaseUITest`.
 Code here is hooked onto TestNG for example we will have code run at different points of the 
 TestNG test lifecycle which allows us to setup a driver `@BeforeMethod` and close the driver
 `@AfterMethod` (a test is mapped as a method with TestNG)
@@ -396,7 +398,7 @@ you should instantiate a new `Logger` in the class from which you're logging. E.
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class SomeClass extends BasePage { // Or BaseTest
+public class SomeClass extends BasePage { // Or BaseUITest
 
     private Logger logger = LogManager.getLogger(SomeClass.class);
     

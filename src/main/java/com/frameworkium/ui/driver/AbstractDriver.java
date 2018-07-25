@@ -43,17 +43,6 @@ public abstract class AbstractDriver implements Driver {
         maximiseBrowserIfRequired();
     }
 
-    private Capabilities addProxyIfRequired(Capabilities caps) {
-        if (Property.PROXY.isSpecified()) {
-            MutableCapabilities mutableCapabilities = new MutableCapabilities();
-            mutableCapabilities.setCapability(
-                    CapabilityType.PROXY, createProxy(Property.PROXY.getValue()));
-            return caps.merge(mutableCapabilities);
-        } else {
-            return caps;
-        }
-    }
-
     private WebDriverWrapper setupEventFiringWebDriver(Capabilities capabilities) {
         Capabilities caps = addProxyIfRequired(capabilities);
         logger.debug("Browser Capabilities: " + caps);
@@ -69,21 +58,18 @@ public abstract class AbstractDriver implements Driver {
         return eventFiringWD;
     }
 
-    private void maximiseBrowserIfRequired() {
-        if (isMaximiseRequired()) {
-            this.webDriverWrapper.manage().window().maximize();
+    private Capabilities addProxyIfRequired(Capabilities caps) {
+        if (Property.PROXY.isSpecified()) {
+            MutableCapabilities mutableCapabilities = new MutableCapabilities();
+            mutableCapabilities.setCapability(
+                    CapabilityType.PROXY, createProxy(Property.PROXY.getValue()));
+            return caps.merge(mutableCapabilities);
+        } else {
+            return caps;
         }
     }
 
-    private boolean isMaximiseRequired() {
-        boolean ableToMaximise = !Sauce.isDesired()
-                && !BrowserStack.isDesired()
-                && !Driver.isNative();
-
-        return ableToMaximise && Property.MAXIMISE.getBoolean();
-    }
-
-    private static Proxy createProxy(String proxyProperty) {
+    private Proxy createProxy(String proxyProperty) {
         Proxy proxy = new Proxy();
         switch (proxyProperty.toLowerCase()) {
             case "system":
@@ -104,7 +90,7 @@ public abstract class AbstractDriver implements Driver {
         return proxy;
     }
 
-    private static Proxy createManualProxy(String proxyProperty) {
+    private Proxy createManualProxy(String proxyProperty) {
         String proxyString = getProxyURL(proxyProperty);
         Proxy proxy = new Proxy();
         proxy.setProxyType(ProxyType.MANUAL)
@@ -115,7 +101,7 @@ public abstract class AbstractDriver implements Driver {
         return proxy;
     }
 
-    private static String getProxyURL(String proxyProperty) {
+    private String getProxyURL(String proxyProperty) {
         try {
             URI proxyURI = new URI(proxyProperty);
             String host = proxyURI.getHost();
@@ -131,6 +117,20 @@ public abstract class AbstractDriver implements Driver {
             logger.error(message);
             throw new IllegalArgumentException(message, e);
         }
+    }
+
+    private void maximiseBrowserIfRequired() {
+        if (isMaximiseRequired()) {
+            this.webDriverWrapper.manage().window().maximize();
+        }
+    }
+
+    private boolean isMaximiseRequired() {
+        boolean ableToMaximise = !Sauce.isDesired()
+                && !BrowserStack.isDesired()
+                && !Driver.isNative();
+
+        return ableToMaximise && Property.MAXIMISE.getBoolean();
     }
 
 }

@@ -70,7 +70,6 @@ public class ScreenshotListener extends TestListenerAdapter {
         try (OutputStream screenshotStream = Files.newOutputStream(screenshot)) {
             byte[] bytes = driver.getScreenshotAs(OutputType.BYTES);
             screenshotStream.write(bytes);
-            screenshotStream.close();
         } catch (IOException e) {
             logger.error("Unable to write " + screenshot, e);
         } catch (WebDriverException e) {

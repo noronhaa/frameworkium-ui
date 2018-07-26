@@ -21,7 +21,11 @@ public class HeaderComponent extends HtmlElement {
 
     @Visible
     @Name("Home Logo/Link")
-    @FindBy(css = "a.header-logo-invertocat")
+    // sometimes css is different, A/B testing maybe?
+    // @FindBy(css = "a.header-logo-invertocat")
+    // Have to use @Visible for this logo and other items might not be visible
+    // depending upon resolution etc.
+    @FindBy(css = "a[aria-label='Homepage']")
     private Link homeLink;
 
     @FindBy(name = "q")
@@ -68,12 +72,12 @@ public class HeaderComponent extends HtmlElement {
     }
 
     public void testForceVisible() {
-        Wait<WebDriver> wait = BaseUITest.newDefaultWait();
-
         WebElement link = homeLink.getWrappedElement();
         // hide the home link
         BaseUITest.getDriver().executeScript(
                 "arguments[0].style.visibility='hidden';", link);
+
+        Wait<WebDriver> wait = BaseUITest.newDefaultWait();
         wait.until(ExpectedConditions.not(visibilityOf(link)));
         // test force visible works
         new Visibility().forceVisible(link);

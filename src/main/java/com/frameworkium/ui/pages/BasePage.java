@@ -17,7 +17,7 @@ import java.util.Observable;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
-public abstract class BasePage<T extends BasePage<T>> extends Observable {
+public abstract class BasePage<T extends BasePage<T>> {
 
     protected final Logger logger = LogManager.getLogger(this);
     protected final WebDriver driver;

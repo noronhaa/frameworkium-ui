@@ -41,8 +41,6 @@ public class HeaderComponent extends HtmlElement {
     private Link exploreLink;
 
     private void showHeaderMenuIfCollapsed() {
-        Wait<WebDriver> wait = BaseUITest.newDefaultWait();
-
         // If browser is opened with width of 960 pixels or less
         // then the Header Menu is not displayed and a 'Hamburger' button is displayed instead. 
         // This button needs to be clicked to display the Header Menu.
@@ -55,13 +53,15 @@ public class HeaderComponent extends HtmlElement {
             hamburgerButton.click();
 
             // Ensure the Header Menu is displayed before attempting to click a link
-            wait.until(ExpectedConditions.visibilityOf(headerMenu));
+            BaseUITest.getWait().until(ExpectedConditions.visibilityOf(headerMenu));
         }
     }
 
     public ExplorePage clickExplore() {
         showHeaderMenuIfCollapsed();
-        exploreLink.click();
+        BaseUITest.getWait()
+                .until(ExpectedConditions.visibilityOf(exploreLink))
+                .click();
         return PageFactory.newInstance(ExplorePage.class);
     }
 

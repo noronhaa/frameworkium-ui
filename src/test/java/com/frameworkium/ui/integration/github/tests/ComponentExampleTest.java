@@ -15,7 +15,10 @@ public class ComponentExampleTest extends BaseUITest {
     public final void component_example_test() {
 
         // Navigate to homepage then use the nav bar to go to the explore page
-        ExplorePage explorePage = HomePage.open().then().with().theHeader().clickExplore();
+        ExplorePage explorePage = HomePage.open()
+                .then().with()
+                .theHeader()
+                .clickExplore();
 
         // not a great assertion, improving this is an exercise for the reader
         assertThat(explorePage.getTitle()).isEqualTo("Explore · GitHub");

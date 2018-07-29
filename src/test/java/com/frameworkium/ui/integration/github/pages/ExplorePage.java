@@ -12,8 +12,13 @@ public class ExplorePage extends BasePage<ExplorePage> {
     @Name("Header")
     private HeaderComponent header;
 
+    // Not (yet) used, but ensures we are indeed on the explore page
     @Visible
     private WebElement trending;
+
+    public static ExplorePage open() {
+        return new ExplorePage().get("https://github.com/explore");
+    }
 
     public HeaderComponent theHeader() {
         return header;

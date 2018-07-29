@@ -37,9 +37,6 @@ public class HeaderComponent extends HtmlElement {
     @FindBy(css = "nav")
     private WebElement headerMenu;
 
-    @FindBy(css = "nav a[href='/explore']")
-    private Link exploreLink;
-
     private void showHeaderMenuIfCollapsed() {
         // If browser is opened with width of 960 pixels or less
         // then the Header Menu is not displayed and a 'Hamburger' button is displayed instead. 
@@ -55,14 +52,6 @@ public class HeaderComponent extends HtmlElement {
             // Ensure the Header Menu is displayed before attempting to click a link
             BaseUITest.getWait().until(ExpectedConditions.visibilityOf(headerMenu));
         }
-    }
-
-    public ExplorePage clickExplore() {
-        showHeaderMenuIfCollapsed();
-        BaseUITest.getWait()
-                .until(ExpectedConditions.visibilityOf(exploreLink))
-                .click();
-        return PageFactory.newInstance(ExplorePage.class);
     }
 
     public SearchResultsPage search(String searchText) {

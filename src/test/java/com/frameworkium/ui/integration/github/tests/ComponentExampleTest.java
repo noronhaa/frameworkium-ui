@@ -5,8 +5,6 @@ import com.frameworkium.ui.integration.github.pages.HomePage;
 import com.frameworkium.ui.tests.BaseUITest;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static com.google.common.truth.Truth.assertThat;
 
 public class ComponentExampleTest extends BaseUITest {
@@ -14,21 +12,20 @@ public class ComponentExampleTest extends BaseUITest {
     @Test(description = "Simple test showing the use of components")
     public final void component_example_test() {
 
-        // Navigate to homepage then use the nav bar to go to the explore page
-        ExplorePage explorePage = HomePage.open()
-                .then().with()
-                .theHeader()
-                .clickExplore();
+        // Go directly to the explore page, home page is tested elsewhere
+        ExplorePage explorePage = ExplorePage.open();
 
         // not a great assertion, improving this is an exercise for the reader
         assertThat(explorePage.getTitle()).isEqualTo("Explore · GitHub");
 
         // Search for "Selenium" and check SeleniumHQ/selenium is one of the returned repos.
-        List<String> searchResults = explorePage.with().theHeader()
-                .search("Selenium")
-                .getRepoNames();
+        boolean isTheSeleniumRepoDisplayed =
+                explorePage.with().theHeader()
+                        .search("Selenium")
+                        .getRepoNames()
+                        .anyMatch("SeleniumHQ/selenium"::equals);
 
-        assertThat(searchResults).contains("SeleniumHQ/selenium");
+        assertThat(isTheSeleniumRepoDisplayed).isTrue();
     }
 
     @Test(description = "force visible makes hidden element visible")

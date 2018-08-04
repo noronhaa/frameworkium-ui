@@ -41,14 +41,16 @@
       <version>3.0-BETA2</version>
     </dependency>
     <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>3.14.0</version>
+    </dependency>
+    <dependency>
+      <!-- Required so that Google Truth works,
+           version 25.0 in Selenium is insufficient -->
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>25.1-jre</version>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>3.13.0</version>
     </dependency>
     <dependency>
       <groupId>io.appium</groupId>
@@ -81,18 +83,18 @@
       <artifactId>htmlelements-java</artifactId>
       <version>1.19</version>
     </dependency>
+
+    <!--Test Dependencies-->
     <dependency>
       <groupId>com.google.truth</groupId>
       <artifactId>truth</artifactId>
       <version>0.42</version>
       <scope>test</scope>
     </dependency>
-
-    <!--Test Dependencies-->
     <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>3.1.0</version>
+      <groupId>com.google.truth.extensions</groupId>
+      <artifactId>truth-java8-extension</artifactId>
+      <version>0.42</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -106,6 +108,12 @@
           <artifactId>groovy-all</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>3.1.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

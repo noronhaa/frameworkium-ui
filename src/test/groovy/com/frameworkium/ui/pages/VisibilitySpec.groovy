@@ -1,29 +1,32 @@
 package com.frameworkium.ui.pages
 
 import com.frameworkium.ui.driver.Driver
-import com.frameworkium.ui.pages.Visibility
 import com.frameworkium.ui.pages.pageobjects.PageObjects
 import com.frameworkium.ui.tests.BaseUITest
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.TimeoutException
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
-import org.openqa.selenium.support.ui.Clock
 import org.openqa.selenium.support.ui.FluentWait
 import org.openqa.selenium.support.ui.Sleeper
 import ru.yandex.qatools.htmlelements.element.TextInput
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import java.time.Clock
+import java.time.Duration
+
 @Unroll
 class VisibilitySpec extends Specification {
 
     /* Mocks used in each test */
-    def wait = new FluentWait<>(Mock(WebDriver), Mock(Clock), Mock(Sleeper))
+    def wait = new FluentWait<>(Stub(WebDriver), Clock.systemUTC(), Sleeper.SYSTEM_SLEEPER)
+            .pollingEvery(Duration.ofMillis(1))
+            .withTimeout(Duration.ofNanos(1))
     def mockDriver = Mock(JavascriptExecutor)
     def sut = new Visibility(wait, mockDriver)
 
-    // methods which create new Mocks each time
+    // methods that create new Mocks each time
 
     // Assert exactly one isDisplayed() call per WebElement
     def newVisibleElement() {
@@ -50,7 +53,7 @@ class VisibilitySpec extends Specification {
         BaseUITest.setWait(wait)
     }
 
-    def "Wait for Single @Visible Element to be displayed"() {
+    def "Wait for Single visible @Visible Element to be displayed"() {
 
         given: "A page object with @Visible element field"
             def pageObject = new PageObjects.SingleVisibleElement()
@@ -60,6 +63,12 @@ class VisibilitySpec extends Specification {
             sut.waitForAnnotatedElementVisibility(pageObject)
         then: "Wait is successful"
             notThrown(TimeoutException)
+    }
+
+    def "Wait for Single invisible @Visible Element to be displayed"() {
+
+        given: "A page object with @Visible element field"
+            def pageObject = new PageObjects.SingleVisibleElement()
 
         when: "Waiting for an invisible @Visible element"
             pageObject.visibleElement = newInvisibleElement()
@@ -68,7 +77,7 @@ class VisibilitySpec extends Specification {
             thrown(TimeoutException)
     }
 
-    def "Wait for Single @Invisible Element to not be displayed"() {
+    def "Wait for Single invisible @Invisible Element to not be displayed"() {
 
         given: "A page object with @Invisible element field"
             def pageObject = new PageObjects.SingleInvisibleElement()
@@ -79,6 +88,13 @@ class VisibilitySpec extends Specification {
         then: "Wait is successful when element is not displayed"
             1 * pageObject.invisibleTextInput.isDisplayed() >> false
             notThrown(Exception)
+    }
+
+    def "Wait for Single visible @Invisible Element to not be displayed"() {
+
+        given: "A page object with @Invisible element field"
+            def pageObject = new PageObjects.SingleInvisibleElement()
+            pageObject.invisibleTextInput = Mock(TextInput)
 
         when: "Waiting for a visible @Invisible element"
             sut.waitForAnnotatedElementVisibility(pageObject)
@@ -87,7 +103,7 @@ class VisibilitySpec extends Specification {
             thrown(TimeoutException)
     }
 
-    def "Wait for Single @ForceVisible Element to be displayed"() {
+    def "Wait for Single visible @ForceVisible Element to be displayed"() {
 
         given: "A page object with @ForceVisible element field"
             def pageObject = new PageObjects.SingleForceVisibleElement()
@@ -99,6 +115,12 @@ class VisibilitySpec extends Specification {
             1 * mockDriver.executeScript(_ as String, _ as WebElement)
         then: "wait is successful when element is displayed"
             notThrown(Exception)
+    }
+
+    def "Wait for Single invisible @ForceVisible Element to be displayed"() {
+
+        given: "A page object with @ForceVisible element field"
+            def pageObject = new PageObjects.SingleForceVisibleElement()
 
         when:
             pageObject.forceVisibleElement = newInvisibleElement()
@@ -183,7 +205,7 @@ class VisibilitySpec extends Specification {
         then: "Throws exception due to too many visibility related Annotations"
             def ex = thrown(IllegalArgumentException)
             ex.message ==~
-                    /Field $element on [A-z\.$]+ has too many Visibility related Annotations/
+            /Field $element on [A-z\.$]+ has too many Visibility related Annotations/
         where:
             pageObject                                       || element
             new PageObjects.MultiVisibilityWebElement()      || "myWebElement"

@@ -8,7 +8,7 @@ import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.CheckBox;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CheckboxesPage extends BasePage<CheckboxesPage> {
 
@@ -28,10 +28,9 @@ public class CheckboxesPage extends BasePage<CheckboxesPage> {
         return this;
     }
 
-    public List<Boolean> getAllCheckboxCheckedStatus() {
+    public Stream<Boolean> getAllCheckboxCheckedStatus() {
 
         return allCheckboxes.stream()
-                .map(CheckBox::isSelected)
-                .collect(Collectors.toList());
+                .map(CheckBox::isSelected);
     }
 }

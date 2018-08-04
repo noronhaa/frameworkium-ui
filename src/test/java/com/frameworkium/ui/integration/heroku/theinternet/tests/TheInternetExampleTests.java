@@ -2,6 +2,7 @@ package com.frameworkium.ui.integration.heroku.theinternet.tests;
 
 import com.frameworkium.ui.integration.heroku.theinternet.pages.*;
 import com.frameworkium.ui.tests.BaseUITest;
+import com.google.common.truth.Truth8;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
@@ -20,7 +21,7 @@ public class TheInternetExampleTests extends BaseUITest {
                 .checkAllCheckboxes();
 
         // Assert that all checkboxes are checked
-        assertThat(checkboxesPage.getAllCheckboxCheckedStatus())
+        Truth8.assertThat(checkboxesPage.getAllCheckboxCheckedStatus())
                 .named("check status of checkboxes")
                 .doesNotContain(false);
     }
@@ -108,11 +109,11 @@ public class TheInternetExampleTests extends BaseUITest {
         List<String> lastNameColumn =
                 sortableDataTablesPage.getTable2ColumnContents("Last Name");
 
-        // Confirm that the column is then ordered by the last name
-        assertThat(lastNameColumn).isOrdered();
-
         // Confirm that "Bach" is then the first surname in table 2
         assertThat(lastNameColumn.get(0)).isEqualTo("Bach");
+
+        // Confirm that the column is then ordered by the last name
+        assertThat(lastNameColumn).isOrdered();
     }
 
 }
